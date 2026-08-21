@@ -19,11 +19,11 @@ if st.button("submit"):
     
     match option:
         case "open ai":
-            
+            from langchain_openai import ChatOpenAI
 
             llm = ChatOpenAI(
                 model="gpt-4o-mini",
-                api_key="your-openai-api-key",  
+                api_key=st.secrets["OPENAI_API_KEY"],  # Pulls securely from secrets.toml
                 temperature=0
             )
             response = llm.invoke(query)
@@ -34,30 +34,31 @@ if st.button("submit"):
 
             llm = ChatGoogleGenerativeAI(
                 model="gemini-2.0-flash",
-                google_api_key="your-google-api-key",
+                google_api_key=st.secrets["GOOGLE_API_KEY"],
                 temperature=0
             )
             response = llm.invoke(query)
             st.write(response.content)
 
         case "anthropic":
-            
+            from langchain_anthropic import ChatAnthropic
 
             llm = ChatAnthropic(
                 model="claude-3-5-sonnet-latest",
-                api_key="your-anthropic-api-key",
+                api_key=st.secrets["ANTHROPIC_API_KEY"],
                 temperature=0
             )
             response = llm.invoke(query)
             st.write(response.content)
 
-        case "grok":  
+        case "grok":
             from langchain_groq import ChatGroq
 
             llm = ChatGroq(
                 model="llama-3.3-70b-specdec",
-                api_key="your-groq-api-key",
+                api_key=st.secrets["GROQ_API_KEY"],
                 temperature=0
             )
             response = llm.invoke(query)
             st.write(response.content)
+    
