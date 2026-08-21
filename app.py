@@ -1,5 +1,8 @@
 import streamlit as st
-
+from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_anthropic import ChatAnthropic
+from langchain_groq import ChatGroq
 st.title("Multi Model ChatBot")
 
 # Dropdown menu for selecting the model
@@ -11,12 +14,12 @@ option = st.selectbox(
 # User input text field
 query = st.text_input("User question : ", "What is Machine learning")
 
-# Submit button to trigger the API call
-if st.button("Ask"):
+
+if st.button("submit"):
     # Python's match-case syntax (No curly braces)
     match option:
         case "open ai":
-            from langchain_openai import ChatOpenAI
+            
 
             llm = ChatOpenAI(
                 model="gpt-4o-mini",
@@ -38,7 +41,7 @@ if st.button("Ask"):
             st.write(response.content)
 
         case "anthropic":
-            from langchain_anthropic import ChatAnthropic
+            
 
             llm = ChatAnthropic(
                 model="claude-3-5-sonnet-latest",
@@ -48,7 +51,7 @@ if st.button("Ask"):
             response = llm.invoke(query)
             st.write(response.content)
 
-        case "grok":  # Fixed the 'groc' typo to match the selectbox
+        case "grok":  
             from langchain_groq import ChatGroq
 
             llm = ChatGroq(
