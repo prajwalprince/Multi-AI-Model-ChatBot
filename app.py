@@ -5,25 +5,25 @@ from langchain_anthropic import ChatAnthropic
 from langchain_groq import ChatGroq
 st.title("Multi Model ChatBot")
 
-# Dropdown menu for selecting the model
+
 option = st.selectbox(
     "AI Model", 
     ("open ai", "google ai", "anthropic", "grok")
 )
 
-# User input text field
+
 query = st.text_input("User question : ", "What is Machine learning")
 
 
 if st.button("submit"):
-    # Python's match-case syntax (No curly braces)
+    
     match option:
         case "open ai":
             
 
             llm = ChatOpenAI(
                 model="gpt-4o-mini",
-                api_key="your-openai-api-key",  # Replace with safe keys
+                api_key="your-openai-api-key",  
                 temperature=0
             )
             response = llm.invoke(query)
